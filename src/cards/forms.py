@@ -33,4 +33,16 @@ class UploadCardsForm(forms.Form):
                 _('The first line must have a number between 1 and 99!')
             )
 
+        # Check if the first line is corresponds to quantity of numbers
+        if quantity != len(file.readlines()):
+            raise forms.ValidationError(
+                _('The first line must corresponds to quantity of numbers!')
+            )
+
+        # Set the cursor to begin of file
+        file.seek(0)
+
+        # Consume the first line to doesn't appear on results
+        file.readline()
+
         return file

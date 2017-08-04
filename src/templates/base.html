@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{% trans 'Credit card number validator' %}</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'semantic/semantic.min.css' %}">
+	</head>
+
+	<body>
+		<div class="ui content container">
+			{% block content %}{% endblock content %}
+		</div>
+	</body>
+</html>

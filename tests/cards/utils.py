@@ -21,13 +21,13 @@ def generate_file(qt_lines='14'):
 5123 - 3567 - 8912 - 3456
 '''
 
-    #
+    # Create buffer
     buff = io.StringIO(content)
 
-    #
+    # Set the cursor to write
     buff.seek(0, 2)
 
-    #
+    # Create the InMemoryUploadedFile
     file = InMemoryUploadedFile(
         buff,
         'file',
@@ -37,7 +37,7 @@ def generate_file(qt_lines='14'):
         None,
     )
 
-    #
+    # Set the cursor to begin of file
     file.seek(0)
 
     return file

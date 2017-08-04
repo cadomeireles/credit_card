@@ -15,3 +15,6 @@ STATIC_ROOT = BASE_DIR.child('public', 'static')
 STATICFILES_DIRS = [
     BASE_DIR.child('src', 'static'),
 ]
+
+# Staticfiles storage
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

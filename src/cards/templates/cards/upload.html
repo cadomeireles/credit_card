@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+
+{% block content %}
+	<h1 class="ui large header">{% trans 'Credit card number validator' %}</h1>
+
+	<div class="ui segments">
+		<div class="ui segment">
+			<h1 class="ui medium dividing header">{% trans 'Upload' %}</h1>
+
+			{# section upload #}
+			<section>
+				<form class="ui form" action="" method="POST" enctype="multipart/form-data">
+					{% csrf_token %}
+
+					<div class="field">
+						{% if form.file.errors %}
+							<div class="ui small red message">
+								{% for error in form.file.errors %}
+									{{ error }}
+								{% endfor %}
+							</div>
+						{% endif %}
+
+						<label for="{{ form.file.id_for_label }}">{{ form.file.label }}</label>
+						<input type="file" name="{{ form.file.name }}" id="{{ form.file.id_for_label }}">
+					</div>
+
+					<button class="ui primary button" type="submit">{% trans 'Upload' %}</button>
+				</form>
+			</section>
+
+			{# section results #}
+			{% if cards %}
+				<div class="ui hidden divider"></div>
+
+				<section>
+					<h1 class="ui medium dividing header">{% trans 'Results' %}</h1>
+
+					<table class="ui table">
+						<thead>
+							<tr>
+								<th>{% trans 'Number' %}</th>
+								<th>{% trans 'Is valid?' %}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for number, is_valid in cards.items %}
+								<tr class="{% if is_valid %}positive{% else %}negative{% endif %}">
+									<td>{{ number }}</td><td>{{ is_valid|yesno|capfirst }}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</section>
+			{% endif %}
+
+		</div>
+	</div>
+
+{% endblock content %}
